@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+langchain
+langchain-groq
+python-dotenv
+pymupdf
+python-docx
+pydantic
+sentence-transformers
+scikit-learn
+pandas
+numpy
+-e .
