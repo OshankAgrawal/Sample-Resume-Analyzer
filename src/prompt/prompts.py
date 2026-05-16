@@ -9,7 +9,15 @@ ANALYSIS_PROMPT ="""
     Job Description:
     {job_description}
 
-    Return ONLY valid JSON in the following format:
+    IMPORTANT INSTRUCTIONS:
+        - Return ONLY valid JSON.
+        - Do NOT include markdown formatting.
+        - Do NOT include explanation text.
+        - Do NOT include ```json.
+        - Use the exact keys provided below.
+        - recommendation must be either "Shortlist" or "Reject".
+
+    Expected JSON format:
 
     {{
         "match_percentage": integer,
@@ -17,7 +25,7 @@ ANALYSIS_PROMPT ="""
         "strengths": [],
         "weaknesses": [],
         "suggestions": [],
-        "Recommendations": "Shortlist or Reject"
+        "recommendation": "Shortlist or Reject"
     }}
 
     Rules:
