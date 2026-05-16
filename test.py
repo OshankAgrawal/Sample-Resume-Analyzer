@@ -1,12 +1,9 @@
-import sys
+from src.components.resume_parser import ResumeParser
 
-from src.logger.logger import logging
-from src.exception.custom_exception import CustomException
+file_path = "oshankagrawal.docx"
 
+parser = ResumeParser(file_path)
 
-try:
-    a = 1 / 0
+text = parser.extract_resume_text()
 
-except Exception as e:
-    logging.error(e)
-    raise CustomException(e, sys)
+print(text)
