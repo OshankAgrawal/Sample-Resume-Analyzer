@@ -12,7 +12,6 @@ A simple AI-based Resume Analyzer that compares a candidate's resume with a job 
 * AI-Based Resume Analysis
 * Missing Skills Detection
 * Strengths & Weaknesses Analysis
-* Resume Improvement Suggestions
 * Final Recommendation System
 * Interactive Streamlit UI
 
@@ -195,5 +194,3 @@ Frontend will run on: `http://localhost:8501`
 **Oshank Agrawal**
 *Developer, Problem Solver, Tech Enthusiast*
 🔗 [LinkedIn](https://www.linkedin.com/in/oshankagrawal/) • 📧 [E-Mail](mailto:oshankagrawal@gmail.com)
-
----
