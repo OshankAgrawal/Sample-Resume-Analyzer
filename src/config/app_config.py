@@ -22,4 +22,4 @@ class AppConfig:
 
     API_VERSION = "1.0"
 
-    API_DESCRIPTION = ("Production Grade AI Resume Analysis System")
+    API_DESCRIPTION = ("AI Resume Analysis System")
