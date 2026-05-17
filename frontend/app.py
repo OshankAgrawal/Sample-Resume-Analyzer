@@ -1,8 +1,12 @@
 import streamlit as st
 import requests
+from config import FrontendConfig
+from services.api_service import analyze_resume_api
+from utils.ui_helper import display_scores_cards, display_recommendation, display_list_section
 
 st.set_page_config(
-    page_title="AI Resume Analyzer",
+    page_title=FrontendConfig.APP_TITLE,
+    page_icon=FrontendConfig.PAGE_ICON,
     layout="wide"
 )
 
@@ -58,23 +62,7 @@ if st.button("Analyze Resume"):
     else:
 
         with st.spinner("Analyzing Resume..."):
-            files = {
-                "resume": (
-                    upload_file.name,
-                    upload_file.getvalue(),
-                    upload_file.type
-                )
-            }
-
-            data = {
-                "job_description": job_description
-            }
-
-            response = requests.post(
-                "http://127.0.0.1:8000/analyze-resume",
-                files=files,
-                data=data
-            )
+            response = analyze_resume_api(upload_file, job_description)
 
             if response.status_code == 200:
 
@@ -83,58 +71,22 @@ if st.button("Analyze Resume"):
                 st.success("Analysis completed Successfully!")
 
                 # Scores
-                st.subheader("Match Scores")
-
-                col1, col2, col3 = st.columns(3)
-
-                col1.metric(
-                    "Semantic Score",
-                    f"{result["semantic_match_score"]}%"
-                )
-
-                col2.metric(
-                    "LLM Score",
-                    f"{result["llm_match_score"]}%"
-                )
-
-                col3.metric(
-                    "Final Score",
-                    f"{result["final_match_score"]}%"
-                )
+                display_scores_cards(result)
 
                 # Missing skills
-                st.subheader("Missing Skills")
+                display_list_section("Missing Skills", result["missing_skills"])
 
-                for item in result["missing_skills"]:
-                    st.write(f"- {item}")
-
-                # Stringths
-                st.subheader("Strengths")
-
-                for item in result["strengths"]:
-                    st.write(f"- {item}")
+                # Strengths
+                display_list_section("Strengths", result["strengths"])
 
                 # Weaknesses
-                st.subheader("Weaknesses")
-
-                for item in result["weaknesses"]:
-                    st.write(f"- {item}")
+                display_list_section("Weaknesses", result["weaknesses"])
 
                 # Suggestions
-                st.subheader("Suggestions")
-
-                for item in result["suggestions"]:
-                    st.write(f"- {item}")
+                display_list_section("Suggestions", result["suggestions"])
 
                 # Recommendation
-                st.subheader("Recommendation")
-
-                recommendation = result["recommendation"]
-
-                if recommendation == "Shortlist":
-                    st.success(f"{recommendation}")
-                else:
-                    st.error(f"{recommendation}")
+                display_recommendation(result)
 
             else:
 
