@@ -8,6 +8,7 @@ from src.logger.logger import logging
 from src.exception.custom_exception import CustomException
 from src.utils.json_parser import extract_json
 from src.entity.response_schema import ResumeAnalysisResponse
+from src.config.app_config import AppConfig
 
 class LLMAnalyzer:
     """Handles LLM-based resume analysis"""
@@ -16,7 +17,7 @@ class LLMAnalyzer:
         
         self.llm = ChatGroq(
             groq_api_key = GROQ_API_KEY,
-            model="llama-3.1-8b-instant"
+            model=AppConfig.LLM_MODEL
         )
 
     

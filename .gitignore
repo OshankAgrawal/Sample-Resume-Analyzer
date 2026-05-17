@@ -220,4 +220,21 @@ __marimo__/
 
 *.pdf
 *.docx
+# Project Generated Files
+logs/
+artifacts/
+
+# Model Cache
+.huggingface/
+
+# Temporary Files
+tempCodeRunnerFile.py
+
+# Ignore Log Files
+*.log
+
+# Ignore Uploaded Resumes
+artifacts/*.pdf
+artifacts/*.docx
+
 sample_output.txt

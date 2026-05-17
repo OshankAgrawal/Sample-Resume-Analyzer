@@ -11,4 +11,5 @@ sentence-transformers
 scikit-learn
 pandas
 numpy
+python-multipart
 -e .

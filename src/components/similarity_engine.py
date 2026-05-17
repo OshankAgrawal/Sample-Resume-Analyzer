@@ -6,22 +6,29 @@ from sklearn.metrics.pairwise import cosine_similarity
 from src.logger.logger import logging
 from src.exception.custom_exception import CustomException
 
+from src.config.app_config import AppConfig
+
 class SimilarityEngine:
     """
         Handles semantic similarity calculation
         between resume and job description
     """
+    _model = None
 
     def __init__(self):
         
         try:
-            logging.info("Loading sentence transformer model")
+            if SimilarityEngine._model is None:
 
-            self.model = SentenceTransformer(
-                "sentence-transformers/all-MiniLM-L6-v2"
-            )
+                logging.info("Loading sentence transformer model")
 
-            logging.info("Model loaded successfully")
+                SimilarityEngine._model = SentenceTransformer(
+                    AppConfig.EMBEDDING_MODEL
+                )
+
+                logging.info("Model loaded successfully")
+
+            self._model = SimilarityEngine._model
 
         except Exception as e:
             logging.error("Error loading embedding model")
@@ -33,9 +40,9 @@ class SimilarityEngine:
             logging.info("Entered similarity calculation method")
 
             # Generate embeddings
-            resume_embeddings = self.model.encode([resume_text])
+            resume_embeddings = self._model.encode([resume_text])
 
-            jd_embeddings = self.model.encode([job_description])
+            jd_embeddings = self._model.encode([job_description])
 
             # Calculate cosine similarity
             similarity_score = cosine_similarity(
