@@ -55,6 +55,16 @@ class RecommendationEngine:
 
             logging.info(f"Final Hybrid score: {final_match_score}")
 
+            # Final Recommendation Logic
+            if final_match_score >= 75:
+                recommendation = "Shortlist"
+
+            elif final_match_score >= 60:
+                recommendation = "Hold"
+
+            else:
+                recommendation = "Reject"
+
             # Step 5: Final Response
             final_response = {
                 "semantic_match_score": semantic_score,
@@ -65,7 +75,7 @@ class RecommendationEngine:
                 "strengths": llm_response["strengths"],
                 "weaknesses": llm_response["weaknesses"],
                 "suggestions": llm_response["suggestions"],
-                "recommendation": llm_response["recommendation"]
+                "recommendation": recommendation
             }
 
             logging.info("Recommendation pipeline completed successfully")
