@@ -12,6 +12,3 @@ scikit-learn
 pandas
 numpy
 python-multipart
-streamlit
-requests
--e .
