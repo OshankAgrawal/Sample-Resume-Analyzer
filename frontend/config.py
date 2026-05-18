@@ -1,6 +1,6 @@
 class FrontendConfig:
 
-    API_BASE_URL = "http://backend:8000"
+    API_BASE_URL = "https://sample-resume-analyzer-1.onrender.com"
 
     ANALYZE_ENDPOINT = (
         f"{API_BASE_URL}/analyze-resume"
